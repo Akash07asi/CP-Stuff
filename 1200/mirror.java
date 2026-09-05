@@ -1,7 +1,6 @@
-import java.io.*;
-import java.util.*;
 
-public class removing {
+import java.io.*;
+public class mirror {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -94,37 +93,35 @@ public class removing {
 
         while (t-- > 0) {
 
+            // Input
             int n = fs.nextInt();
-            String s = fs.next();
 
-            List<Integer> ls = new ArrayList<>();
+            int arr[][] = new int[n][n];
+
             for(int i = 0; i < n; i++){
-                if(s.charAt(i) == '0'){
-                    ls.add(i+1);
+
+                String s = fs.next();
+
+                for(int j = 0; j < n; j++){
+                    arr[i][j] = s.charAt(j) - '0';
                 }
             }
 
-            boolean seen [] = new boolean[n+1];
-            long ans = 0;
+            // System.out.println(Arrays.deepToString(arr));
 
-            for(int i = 0; i < ls.size(); i++){
-                int val = ls.get(i);
+            int ans = 0;
+            for(int i = 0; i < n/2; i++){
+                for(int j = 0; j < (n+1)/2; j++){
+                    int ops = 0;
 
-                int cnt = 0;
-                for(int x = val; x <= n; x = x + val){
+                    if(arr[i][j] == 1) ops++;
+                    if(arr[j][n-i-1] == 1) ops++;
+                    if(arr[n-i-1][n-j-1] == 1) ops++;
+                    if(arr[n-j-1][i] == 1) ops++;
 
-                    if(s.charAt(x-1) == '1'){
-                        break;
-                    }
 
-                    if(!seen[x]){
-                        cnt++;
-                        seen[x] = true;
-                    }
+                    ans = ans + Math.min(ops, 4 - ops);
                 }
-
-                long k = 1L*val*cnt;
-                ans = ans + k;
             }
 
             out.append(ans).append("\n");
@@ -133,10 +130,3 @@ public class removing {
         System.out.print(out);
     }
 }
-
-
-// thinking
-// design of ques was really good
-// i thoightof solution at some extent only there ws some redundancy,
-// also nested loop runs in o nlogn coz 2nd llop run it multiples of x;
-// idea was simple only delte the eleme t which is not set 
