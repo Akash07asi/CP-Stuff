@@ -1,6 +1,7 @@
 import java.io.*;
+import java.util.*;
 
-public class main {
+public class dolce {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -94,9 +95,31 @@ public class main {
         while (t-- > 0) {
 
             int n = fs.nextInt();
+            int x = fs.nextInt();
 
+            int[] nums = new int[n];
+            for(int i = 0; i < n; i++){
+                nums[i] = fs.nextInt();
+            }
 
-            out.append("YES\n");
+            Arrays.sort(nums);
+
+            long[] prefix = new long[n+1];
+            for(int i = 0; i < n; i++){
+                prefix[i+1] = prefix[i] + nums[i];
+            }
+
+            long ans = 0;
+            long val = 0;
+            for(int k = 1; k <= n; k++){
+                if(prefix[k] <= x){
+                    val = (x - prefix[k])/k+1;
+
+                    ans = ans + val;
+                }
+            }
+
+            out.append(ans).append("\n");
         }
 
         System.out.print(out);
