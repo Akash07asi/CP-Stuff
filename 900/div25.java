@@ -1,37 +1,58 @@
 import java.util.*;
 public class div25{
+
+    public static int cost(String k, String s){
+        Character target[] = new Character[2];
+        target[0] = k.charAt(0);
+        target[1] = k.charAt(1);
+
+        int j = 0;
+        int cnt1 = 0;
+        for(int i = s.length() - 1; i >= 0; i--){
+
+            if(s.charAt(i) == target[1]){
+                j = i;
+                break;
+            }
+
+            else{
+                cnt1++;
+            }
+        }
+
+        int cnt2 = 0;
+        for(int i = j - 1; i >= 0; i--){
+            if(s.charAt(i) != target[0]){
+                cnt2++;
+            }
+
+            else{
+                break;
+            }
+        }
+
+        return cnt1+cnt2;
+    }
+
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
+
+        String [] arr = {"00", "25", "50", "75"};
         int t = sc.nextInt();
-        sc.nextLine();
         while(t-- > 0){
             String s = sc.next();
 
-            boolean freeze0 = true;
-            boolean freeze5 = true;
+            int ans = Integer.MAX_VALUE;
+            for(int i = 0; i < 4; i++){
 
-            int cnt0 = 0;
-            int cnt5 = 0;
+                String k = arr[i];
 
-            int cnt2 = 0;
-            int cnt7 = 0;
-            int cnts0 = 0;
-            int cnts5 = 0;
+                int val = cost(k, s);
 
-            for (int i = s.length()-1; i>=0; i--){
-                int cnt = 0;
-                if(s.charAt(i) != '0'){
-                    cnt++;
-                }
-                else if(s.charAt(i) == '0'){
-                    if(freeze0){
-                        cnt0 = cnt;
-                        freeze0 = false;
-                    }
-                    
-                }
+                ans = Math.min(val, ans);
             }
 
+            System.out.println(ans);
         }
     }
 }
