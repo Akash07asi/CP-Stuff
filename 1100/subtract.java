@@ -1,7 +1,8 @@
 
 import java.io.*;
+import java.util.*;
 
-public class Main {
+public class subtract {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -95,11 +96,43 @@ public class Main {
         while (t-- > 0) {
 
             int n = fs.nextInt();
+            long k = fs.nextLong();
 
+            long[] arr = new long[n];
+            for(int i = 0; i < n; i++){
+                arr[i] = fs.nextInt();
+            }
 
-            out.append("YES\n");
+            HashSet<Long> set = new HashSet<>();
+            boolean isFound = false;
+
+            for(int i = 0; i < n; i++){
+                long val = arr[i];
+
+                if(set.contains(val-k) || set.contains(val+k)){
+                    isFound = true;
+                    break;
+                }
+
+                set.add(arr[i]);
+            }
+  
+
+            if(isFound){
+                out.append("YES\n");
+            }
+
+            else{
+                out.append("NO\n");
+            }
         }
 
         System.out.print(out);
     }
 }
+
+// thinking
+
+// jus the extended version of 2 sum, but here is difference equals target
+// rest of the elems doent matter coz subtract from no. then these no. also subtract so, these no. get cancelled out
+// only two elems matter

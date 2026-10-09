@@ -1,7 +1,8 @@
 
+
 import java.io.*;
 
-public class Main {
+public class perfectly {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -91,14 +92,55 @@ public class Main {
         StringBuilder out = new StringBuilder();
 
         int t = fs.nextInt();
-
         while (t-- > 0) {
 
-            int n = fs.nextInt();
+            String s = fs.next();
+            int len = s.length();
 
+            boolean [] seen = new boolean[26];
+            int distinct = 0;
 
-            out.append("YES\n");
+            for(char x : s.toCharArray()){
+                int idx = x - 'a';
+
+                if(!seen[idx]){
+                    distinct++;
+                    seen[idx] = true;
+                }
+            }
+
+            if(distinct == 1){
+                out.append("YES\n");
+                continue;
+            }
+
+            boolean ok = true;
+
+            boolean[] first = new boolean[26];
+
+            for (int i = 0; i < distinct; i++) {
+                int idx = s.charAt(i) - 'a';
+
+                if (first[idx]) {
+                    ok = false;
+                    break;
+                }
+
+                first[idx] = true;
+            }
+
+            if (ok) {
+                for (int i = distinct; i < len; i++) {
+                    if (s.charAt(i) != s.charAt(i - distinct)) {
+                        ok = false;
+                        break;
+                    }
+                }
+            }
+
+            out.append(ok ? "YES\n" : "NO\n");
         }
+
 
         System.out.print(out);
     }

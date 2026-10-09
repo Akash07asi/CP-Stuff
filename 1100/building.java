@@ -1,7 +1,8 @@
 
+
 import java.io.*;
 
-public class Main {
+public class building {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -95,11 +96,54 @@ public class Main {
         while (t-- > 0) {
 
             int n = fs.nextInt();
+            int x = fs.nextInt();
 
+            int mx = 0;
+            int nums[] = new int[n];
+            for(int i = 0; i < n; i++){
+                nums[i] = fs.nextInt();
 
-            out.append("YES\n");
+                mx = Math.max(nums[i], mx);
+            }
+
+            long res = 0;
+            
+            long l = 1;
+            long h = x + mx;
+            while(l <= h){
+
+                long mid = l + 1L*(h - l)/2;
+
+                long ans = 0;
+                for(int i = 0; i < n; i++){
+                    long v = mid - nums[i];
+                    if(v > 0){
+                        ans += v;
+                    }
+
+                    if(ans > x) break;
+                }
+
+                if(ans > x){
+                    h = mid-1;
+                }
+
+                else if(ans <= x){
+                    l = mid+1;
+                    res = mid;
+                }
+            }
+
+            out.append(res).append("\n");
+
         }
 
         System.out.print(out);
     }
 }
+
+//thinking
+
+// not that much thought for the brute solution by my own, like how much water needed, nd stop when ans>x
+// only needed to optimize
+// so binary search on ans satified the contraints

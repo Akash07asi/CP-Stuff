@@ -1,7 +1,7 @@
 
 import java.io.*;
 
-public class Main {
+public class difference {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -91,15 +91,38 @@ public class Main {
         StringBuilder out = new StringBuilder();
 
         int t = fs.nextInt();
-
         while (t-- > 0) {
+            long n = fs.nextLong();
+            long l = fs.nextLong();
+            long r = fs.nextLong();
 
-            int n = fs.nextInt();
+            boolean isValid = true;
+            for(int i = 1; i <= n; i++){
+                long k = (l + i - 1)/i;
+                long x = k*i;
 
+                if(x > r){
+                    isValid = false;
+                    break;
+                }
+            }
 
-            out.append("YES\n");
+            if(isValid){
+                out.append("YES\n");
+                for(int i = 1; i <= n; i++){
+                    long k = (l+i-1)/i;
+                    long x = 1L*k*i;
+
+                    out.append(x).append(" ");
+                }
+
+                out.append("\n");
+            }
+
+            else{
+                out.append("NO\n");
+            }
         }
-
-        System.out.print(out);
+        System.out.println(out);
     }
 }

@@ -1,7 +1,6 @@
-
 import java.io.*;
 
-public class Main {
+public class fun {
 
     // ---------- FAST INPUT ----------
     static class FastScanner {
@@ -91,13 +90,33 @@ public class Main {
         StringBuilder out = new StringBuilder();
 
         int t = fs.nextInt();
-
         while (t-- > 0) {
-
             int n = fs.nextInt();
+            int arr[] = new int[n];
 
+            for(int i = 0; i < n; i++){
+                arr[i] = fs.nextInt();
+            }
 
-            out.append("YES\n");
+            int i = n - 1;
+            while(i >= 0 && arr[i] == arr[n-1]){
+                i--;
+            }
+
+            int cnt = 0;
+
+            while(i >= 0){
+                int len = n - i -1;
+                i = i - len;
+                cnt++;
+
+                while(i >= 0 && arr[i] == arr[n-1]){
+                    i--;
+
+                }
+            }
+
+            out.append(cnt).append("\n");
         }
 
         System.out.print(out);
