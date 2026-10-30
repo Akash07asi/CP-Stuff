@@ -1,12 +1,4 @@
 
-
-
-
-
-
-
-
-
 import java.io.*;
 
 public class mexor {
