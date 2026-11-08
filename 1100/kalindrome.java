@@ -147,3 +147,8 @@ public class kalindrome {
         System.out.print(out);
     }
 }
+
+
+
+
+
